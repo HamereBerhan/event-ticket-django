@@ -1,0 +1,24 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	{% load static %}
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="{% static 'checkin/css/style.css' %}">
+	<title>QR Code Scanner / Reader</title>
+
+</head>
+<body>
+	
+	<div class="container">
+		<h1>Scan QR Codes</h1>
+		<div class="section">
+			<div id="my-qr-reader"></div>
+		</div>
+		<div id="result" class="result"></div> <!-- New div to display the result -->
+	</div>checkin/js/script.js	
+	<script src="https://unpkg.com/html5-qrcode"></script>
+	<script src="{% static 'checkin/js/script.js' %}"></script>
+</body>
+</html>

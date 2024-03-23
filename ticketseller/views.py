@@ -186,18 +186,31 @@ def gen_qrcode(nonce):
     # img.save('./static/qr/'+str(nonce)+'.png') 
     return img
 
-def registeruser(first_name,last_name,phone,email,nonce,session_id,payment_status,check_in_status):
-    customer=Customer(
-        first_name=first_name,
-        last_name=last_name,
-        phone=phone,
-        email=email,
-        nonce=nonce,
-        session_id=session_id,
-        payment_status=payment_status,
-        check_in_status=check_in_status,
+def registeruser(first_name, last_name, phone, email, nonce, session_id, payment_status, check_in_status):
+    existing_customer = Customer.objects.filter(first_name=first_name, last_name=last_name, email=email).first()
+    
+    if existing_customer:
+        # Update the attributes of the existing customer
+        existing_customer.phone = phone
+        existing_customer.nonce = nonce
+        existing_customer.session_id = session_id
+        existing_customer.payment_status = payment_status
+        existing_customer.check_in_status = check_in_status
+        existing_customer.save()
+    else:
+        # Create a new customer instance
+        customer = Customer(
+            first_name=first_name,
+            last_name=last_name,
+            phone=phone,
+            email=email,
+            nonce=nonce,
+            session_id=session_id,
+            payment_status=payment_status,
+            check_in_status=check_in_status
         )
-    customer.save()
+        customer.save()
+
 
 def updatePaymentstatus(session_id,status):
     customer=Customer.objects.get(session_id=session_id)

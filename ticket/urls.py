@@ -16,8 +16,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path,re_path
+from django.conf import settings
+from django.conf.urls.static import static
+
 
 import ticketseller.views as handlers
+import checkin.views as checkin
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -27,4 +31,6 @@ urlpatterns = [
     path('success/<str:nonce>',handlers.success),
     path('err/', handlers.error),
     path('', handlers.home),
+    path('scancode/', checkin.scan_qr),
 ]
+urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

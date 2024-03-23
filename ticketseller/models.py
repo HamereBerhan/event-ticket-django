@@ -13,3 +13,6 @@ class Customer(models.Model):
     check_in_status= models.CharField(max_length=255,default='pending')
     created_at =models.DateTimeField(auto_now=True)
     updated_at=models.DateTimeField(auto_now=True)
+
+    def __str__(self) -> str:
+        return self.first_name + " " + self.last_name
