@@ -26,5 +26,5 @@ urlpatterns = [
     path('notify/',handlers.notify),
     path('success/<str:nonce>',handlers.success),
     path('err/', handlers.error),
-    re_path(r'^.*$',handlers.home),
+    path('', handlers.home),
 ]
