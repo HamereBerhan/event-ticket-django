@@ -7,7 +7,7 @@ body {
 	height: 100vh;
 	box-sizing: border-box;
 	text-align: center;
-	background: rgb(128 0 0 / 66%);
+	background: url('https://hamereberhan.org/cover%20for%20ticket%20webpage%202-01-01-01-01N.webp') center/cover no-repeat;
 }
 .container {
 	width: 100%;
@@ -20,7 +20,7 @@ body {
 }
 
 .section {
-	background-color: #ffffff;
+	background: url('https://hamereberhan.org/TICKET%20FORM-01-01N.webp') center/cover no-repeat;
 	padding: 50px 30px;
 	border: 1.5px solid #b2b2b2;
 	border-radius: 0.25em;
