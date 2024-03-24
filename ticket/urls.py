@@ -30,7 +30,11 @@ urlpatterns = [
     path('notify/',handlers.notify),
     path('success/<str:nonce>',handlers.success),
     path('err/', handlers.error),
-    path('', handlers.home),
+    path('', handlers.home, name='home'),
     path('scancode/', checkin.scan_qr),
+    path('validate/', checkin.validate_user ,name = 'validator'),
+    path('search/', checkin.search_customer, name='search'),
+    path('checkin/<int:customer_id>', checkin.update_customer_checkin, name='update'),
+
 ]
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
