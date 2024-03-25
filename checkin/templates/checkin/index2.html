@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    {% block content %}
+    <h1>Target Page</h1>
+
+    {% if qr_data %}
+    <p>Your QR code data is: {{ qr_data }}</p>
+    {% else %}
+    <p>No QR code data provided.</p>
+    {% endif %}
+    {% endblock %}
+
+</body>
+
+</html>
