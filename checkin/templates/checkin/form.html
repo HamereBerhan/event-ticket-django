@@ -1,0 +1,278 @@
+
+<html>
+<head>
+<meta charset="UTF-8">
+<link rel="icon" type="image/x-icon" href="https://hamereberhan.org/favicon-32x32.png">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  margin: 0;
+  background: url('https://hamereberhan.org/cover%20for%20ticket%20webpage%202-01-01-01-01N.webp') center/cover no-repeat; /* Set background for the entire body */
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 550px;
+  padding: 20px;
+  border-radius: 20px;
+  position: relative;
+  color: #fff;
+  border: 1px solid #333333;
+  margin: auto;
+}
+@media (max-width: 250px) {
+  .form {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 600px) {
+  .form {
+    max-width: 100%;
+  }
+}
+
+    .form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 350px;
+  padding: 80px;
+  border-radius: 20px;
+  position: relative;
+  
+  background: url('https://hamereberhan.org/TICKET%20FORM-01-01N.webp') center/cover no-repeat; /* Set background for the entire body */
+  color: #fff;
+  border: 1px solid #333;
+}
+
+.title {
+  font-size: 28px;
+  font-weight: 600;
+  letter-spacing: -1px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding-left: 30px;
+  color: #297A77;
+}
+
+.title::before {
+  width: 18px;
+  height: 18px;
+}
+
+.title::after {
+  width: 18px;
+  height: 18px;
+  animation: pulse 1s linear infinite;
+}
+
+.title::before,
+.title::after {
+  position: absolute;
+  content: "";
+  height: 16px;
+  width: 16px;
+  border-radius: 50%;
+  left: 0px;
+  background-color: #297A77;
+}
+
+.message, 
+.signin {
+  font-size: 28px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Center horizontally */
+  text-align: center; /* Center text */
+  color: #297A77;
+  margin-top: 10px; /* Remove default margin */
+  
+  padding: 20px; /* Adjust padding as needed */
+}
+
+.signin {
+  text-align: center;
+}
+
+.signin a:hover {
+  text-decoration: underline royalblue;
+}
+
+.signin a {
+  color: #297A77;
+}
+
+.flex {
+  display: flex;
+  width: 100%;
+  gap: 6px;
+}
+
+.form label {
+  position: relative;
+}
+
+.form label .input {
+  background-color: #333;
+  color: #fff;
+  width: 100%;
+  padding: 20px 05px 05px 10px;
+  outline: 0;
+  border: 1px solid rgba(105, 105, 105, 0.397);
+  border-radius: 10px;
+}
+
+.form label .input + span {
+  color: rgba(255, 255, 255, 0.5);
+  position: absolute;
+  left: 10px;
+  top: 0px;
+  font-size: 0.9em;
+  cursor: text;
+  transition: 0.3s ease;
+}
+
+.form label .input:placeholder-shown + span {
+  top: 12.5px;
+  font-size: 0.9em;
+}
+
+.form label .input:focus + span,
+.form label .input:valid + span {
+  color: #297A77;
+  top: 0px;
+  font-size: 0.7em;
+  font-weight: 600;
+}
+
+.form::before {
+  content: ""; /* Create a pseudo-element test */
+  background: url('https://hamereberhan.org/hamere%20birhan%20Logo%20W.png') center/contain no-repeat; /* Set logo as background */
+  position: absolute;
+  top: 5px;
+  bottom: 100px;
+  
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px; /* Set width of the logo */
+  height: 100px; /* Set height of the logo */
+}
+.input {
+  font-size: medium;
+}
+
+.submit {
+  border: none;
+  outline: none;
+  padding: 10px;
+  border-radius: 10px;
+  color: #fff;
+  font-size: 16px;
+  transform: .3s ease;
+  background-color: #297A77;
+}
+
+.submit:hover {
+  background-color: #297A7796;
+}
+.learn {
+  border: none;
+  outline: none;
+  padding: 10px;
+  border-radius: 10px;
+  color: #fff;
+  font-size: 16px;
+  transform: .3s ease;
+  background-color: #AF0202;
+}
+
+.learn:hover {
+  background-color: #AF020296;
+}
+
+@keyframes pulse {
+  from {
+    transform: scale(0.9);
+    opacity: 1;
+  }
+
+  to {
+    transform: scale(1.8);
+    opacity: 0;
+  }
+}
+
+    @media (max-width: 600px) {
+      .form {
+        max-width: 100%;
+      }
+    }
+    /* === removing default button style ===*/
+.button {
+  margin: 0;
+  height: auto;
+  background: transparent;
+  padding: 0;
+  border: none;
+  cursor: pointer;
+}
+
+/* button styling */
+.button {
+  --border-right: 6px;
+  --text-stroke-color: rgba(255,255,255,0.6);
+  --animation-color: #37FF8B;
+  --fs-size: 2em;
+  letter-spacing: 3px;
+  text-decoration: none;
+  font-size: var(--fs-size);
+  font-family: "Arial";
+  position: relative;
+  text-transform: uppercase;
+  color: transparent;
+  -webkit-text-stroke: 1px var(--text-stroke-color);
+}
+/* this is the text, when you hover on button */
+.hover-text {
+  position: absolute;
+  box-sizing: border-box;
+  content: attr(data-text);
+  color: var(--animation-color);
+  width: 0%;
+  inset: 0;
+  border-right: var(--border-right) solid var(--animation-color);
+  overflow: hidden;
+  transition: 0.5s;
+  -webkit-text-stroke: 1px var(--animation-color);
+}
+/* hover */
+.button:hover .hover-text {
+  width: 100%;
+  filter: drop-shadow(0 0 23px var(--animation-color))
+}
+  </style>
+<title> እንኳን ደህና መጡ</title>
+</head>
+<body>
+
+
+  <div id="form4" class="form" style="display: flex;">
+    <p class="message">ያስገቡት መረጃ አልተገኘም እባኮን በድጋሚ ስካን ያድርጉ ወይም በለላ መረጃ ይሞክሩ!</p>
+    <button class="button" type="submit" data-text="Awesome">
+      <span class="actual-text">&nbsp;Scan New&nbsp;</span>
+      <span aria-hidden="true" class="hover-text">&nbsp;Scan New&nbsp;</span>
+    </button>
+  </div>
+</body>
+</html>

@@ -1,0 +1,151 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<link rel="stylesheet" href="C:\Users\yared\Pictures\hamere\style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>QR Code Scanner</title>
+<!-- Include Html5Qrcode library -->
+<script src="https://raw.githack.com/mebjas/html5-qrcode/master/minified/html5-qrcode.min.js"></script>
+<link rel="stylesheet" href="{% static 'checkin/css/style.css' %}">
+
+</head>
+<body>
+
+<div id="div" class="form">
+    <div class="img">
+        <h1>QR Code Scanner</h1>
+    </div>
+
+    <div class="text">
+        <div id="qr-reader"></div>
+        <div id="qr-result"></div>
+        <form id='qr-code-form' action="{ url 'validator'}" method="post">
+          {% csrf_token %}
+          <input id="scanned_text" type="hidden">
+        </form>
+    </div>
+    <p>No QRCode? No Worry, Use <button>search</button></p>
+</div>
+
+<script>
+// Initialize QR code scanner
+const qrReader = new Html5Qrcode('qr-reader');
+let scanning = false;
+let videoStream = null;
+
+// Function to handle successful scan
+const onScanSuccess = qrCodeMessage => {
+  // Create a div element to hold the scanned result
+  const resultDiv = document.createElement('div');
+  resultDiv.classList.add('result-container');
+
+  // Create a p element to display the scanned result
+  const resultText = document.createElement('p');
+  resultText.textContent = `Scanned result: ${qrCodeMessage}`;
+
+  document.getElementById('scanned_text').value = qrCodeMessage;
+  var form = document.getElementById('qr-code-form');
+
+// Submit the form
+	form.submit();
+	  
+  // Append the p element to the div
+  resultDiv.appendChild(resultText);
+
+  // Append the div to the body of the document
+  document.body.appendChild(resultDiv);
+
+  // Sample conditions: Show different divs based on the QR code message
+  if (qrCodeMessage === 'a') {
+    const specialDivA = document.createElement('div1');
+    specialDivA.textContent = 'Special content for code a';
+    document.body.appendChild(specialDivA);
+  } else if (qrCodeMessage === 'b') {
+    const specialDivB = document.createElement('div');
+    specialDivB.textContent = 'Special content for code b';
+    document.body.appendChild(specialDivB);
+  } else if (qrCodeMessage === 'c') {
+    const specialDivC = document.createElement('div');
+    specialDivC.textContent = 'Special content for code c';
+    document.body.appendChild(specialDivC);
+  } else if (qrCodeMessage === 'd') {
+    const specialDivD = document.createElement('div');
+    specialDivD.textContent = 'Special content for code d';
+    document.body.appendChild(specialDivD);
+  }
+
+  // Optionally, you can close the pop-up divs after a certain duration
+  setTimeout(() => {
+    resultDiv.remove();
+    // Optionally, remove specialDivA, specialDivB, specialDivC, specialDivD if necessary
+  }, 5000); // Remove after 5 seconds (adjust as needed)
+};
+
+// Function to handle scan failure
+const onScanError = errorMessage => {
+  console.error(errorMessage);
+  // Optionally handle the error here, without showing an alert
+};
+
+// Function to start scanning
+function startScan() {
+  if (!scanning) {
+    qrReader.start(
+      { facingMode: 'environment' },  // Scan in environment mode
+      { qrbox: 300 },                  // Set size of the QR code scanner box
+      qrCodeMessage => onScanSuccess(qrCodeMessage),  // Success callback function
+      onScanError  // Error callback function
+    )
+    .then(() => {
+      console.log('QR code scan started successfully.');
+      scanning = true;
+    })
+    .catch(error => {
+      console.error('Error starting QR code scan:', error);
+      // Optionally handle the error here, without showing an alert
+    });
+  }
+}
+
+// Function to stop scanning
+function stopScan() {
+  if (scanning) {
+    qrReader.clear();
+    scanning = false;
+  }
+}
+
+// Function to start the video stream
+function startVideoStream() {
+  if (!videoStream) {
+    navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' } })
+      .then(stream => {
+        videoStream = stream;
+      })
+      .catch(error => {
+        console.error('Error accessing video stream:', error);
+        // Optionally handle the error here, without showing an alert
+      });
+  }
+}
+
+// Function to stop the video stream
+function stopVideoStream() {
+  if (videoStream) {
+    videoStream.getTracks().forEach(track => {
+      track.stop();
+    });
+    videoStream = null;
+  }
+}
+
+// Start scanning initially
+startScan();
+startVideoStream(); // Start the video stream
+
+</script>
+</body>
+</html>

@@ -1,0 +1,56 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	{% load static %}
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="{% static 'checkin/css/style.css' %}">
+	<title>QR Code Scanner / Reader</title>
+
+</head>
+<body>
+	
+	<div class="container">
+		<div id="manual-search">
+			<form action="{% url 'search' %}" method="POST">
+				{% csrf_token%}
+            <input name = "search_text" type="text" id="search-input" placeholder="Enter search text">
+            <button type="submit" id="search-button">Search</button>
+			</form>
+        </div>
+        <div id="manual-search-result">
+				{% if customer_find %}
+					{{customer_find.first_name}}
+					{{customer_find.email}}
+					{% if customer_find.check_in_status == "SUCCESS"  %}
+						<h1>Already cheched in</h1>
+					{% endif %}
+					{% if customer_find.check_in_status == "pending" and customer_find.payment_status == "SUCCESS" %}
+
+					 <a href="{% url 'update' customer_find.id %}">please Check In</a>
+					
+					{% if customer_find.payment_status == "pending" %}
+					<h1>Please make payment first</h1>
+					{% endif %}
+					{% endif %}
+				{% endif %}
+		</div> 
+		<h1>Scan QR Codes</h1>
+		<div class="section">
+			<div id="my-qr-reader"></div>
+		</div>
+		<div id="result" class="result"></div> <!-- New div to display the result -->
+		<form id="qr-code-form" method="post" action="{% url 'validator' %}">
+			{% csrf_token %}
+			<input type="hidden" id="scanned_text" name="scanned_text">
+		  </form>
+		  <div id="result"></div>
+		</form>
+		
+	</div>
+	<script src="https://unpkg.com/html5-qrcode"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="{% static 'checkin/js/script.js' %}"></script>
+</body>
+</html>

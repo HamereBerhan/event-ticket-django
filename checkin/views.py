@@ -8,7 +8,7 @@ from ticketseller.models import Customer
 from django.shortcuts import get_object_or_404
 from django.db.models import Q
 def scan_qr(request):
-    return render(request, 'checkin/index.html')
+    return render(request, 'checkin/scanner.html')
 
 
 def validate_user(request):
