@@ -7,6 +7,7 @@ body {
   background: url('https://hamereberhan.org/cover%20for%20ticket%20webpage%202-01-01-01-01N.webp') center/cover no-repeat; /* Set background for the entire body */
 }
 
+<<<<<<< HEAD
 .form {
   display: flex;
   flex-direction: column;
@@ -23,6 +24,10 @@ body {
   .form {
     max-width: 100%;
   }
+=======
+.container h1 {
+	color: #fff000;
+>>>>>>> 5c4882b9411a97b80a1f4b981df5f2607c13758e
 }
 
 @media (max-width: 600px) {
