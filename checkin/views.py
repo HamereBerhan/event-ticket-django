@@ -75,7 +75,7 @@ def search_customer(request):
                 Q(last_name__icontains=search_text) |
                 Q(phone__icontains=search_text) |
                 Q(email__icontains=search_text))
-            ).first()
+            )
         return render(request, 'checkin/search.html', {'customer_find': result_customer})
     return render(request, 'checkin/search.html')
 
