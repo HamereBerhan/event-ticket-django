@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<link rel="stylesheet" href="C:\Users\yared\Pictures\hamere\style.css">
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>QR Code Scanner</title>
@@ -22,14 +22,14 @@
     <div class="text">
         <div id="qr-reader"></div>
         <div id="qr-result"></div>
-        <form id='qr-code-form' action="{ url 'validator'}" method="post">
-          {% csrf_token %}
-          <input id="scanned_text" type="hidden">
-        </form>
+        
     </div>
-    <p>No QRCode? No Worry, Use <button>search</button></p>
+    <p>No QRCode? No Worry, Use <a href="{% url 'search' %}"><button>search</button></a></p>
 </div>
-
+<form id='qr-code-form' action="{% url 'validator' %}" method="POST">
+  {% csrf_token %}
+  <input id="scanned_text" type="hidden" name="scanned_text">
+</form>
 <script>
 // Initialize QR code scanner
 const qrReader = new Html5Qrcode('qr-reader');
@@ -38,20 +38,15 @@ let videoStream = null;
 
 // Function to handle successful scan
 const onScanSuccess = qrCodeMessage => {
-  // Create a div element to hold the scanned result
-  const resultDiv = document.createElement('div');
-  resultDiv.classList.add('result-container');
 
-  // Create a p element to display the scanned result
-  const resultText = document.createElement('p');
-  resultText.textContent = `Scanned result: ${qrCodeMessage}`;
 
   document.getElementById('scanned_text').value = qrCodeMessage;
+  console.log(qrCodeMessage);
   var form = document.getElementById('qr-code-form');
 
 // Submit the form
-	form.submit();
-	  
+  form.submit();
+    
   // Append the p element to the div
   resultDiv.appendChild(resultText);
 
