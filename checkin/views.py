@@ -16,16 +16,16 @@ def scan_qr(request):
 
 def validate_user(request):
 
-    with open('/home/wondm/Desktop/dev/event-ticket-django/checkin/csvf.csv', 'r', encoding='utf-8') as file:
-        reader = csv.DictReader(file)
-        for row in reader:
-            customer = Customer_2(
-                ticket_id=row['ticket_id'],
-                qr_value=row['qr_value'],
-                # Default 'pending' if not provided
+    # with open('/home/wondm/Desktop/dev/event-ticket-django/checkin/csvf.csv', 'r', encoding='utf-8') as file:
+    #     reader = csv.DictReader(file)
+    #     for row in reader:
+    #         customer = Customer_2(
+    #             ticket_id=row['ticket_id'],
+    #             qr_value=row['qr_value'],
+    #             # Default 'pending' if not provided
 
-            )
-            customer.save()
+    #         )
+    #         customer.save()
 
 
     if request.method == 'POST':
@@ -33,27 +33,31 @@ def validate_user(request):
 
         if val and len(val) > 10:
             try:
-                # Query the Customer model to find a user with the given nonce
-                # customer = Customer.objects.filter(nonce=val)
                 customer = Customer.objects.filter(
                 Q(nonce =val)  |
                 Q(session_id=val)
             )
                 
-                # return JsonResponse({'status': 'success', 'customer_id': customer.id})
                 return HttpResponse(customer)
             except Customer.DoesNotExist:
-                # return JsonResponse({'status': 'error', 'message': 'User not found'})
+                return HttpResponse('notfound')
+            
+        elif len(val) == 8:
+            try:
+                customer2 = Customer_2.objects.filter(
+                Q(qr_value =val) 
+            ).first()
+                
+                return render(request, 'checkin/userform.html', {'user2': customer2})
+            except Customer.DoesNotExist:
                 return HttpResponse('notfound')
 
 
+
         else:
-            # return JsonResponse({'status': 'error', 'message': 'Nonce value not provided'})
             return HttpResponse('nononce')
         
     else:
-        # Handle GET request (optional)
-        # return JsonResponse({'status': 'error', 'message': 'Invalid request method'})
         return HttpResponse('errro')
 
 
@@ -85,5 +89,35 @@ def update_customer_checkin(request, customer_id):
     
     customer.check_in_status = 'SUCCESS'
     customer.save()
-    return redirect('home')
-    return render(request, 'checkin/index.html', {'customer': customer})
+    return render(request, 'checkin/user.html', {'user': customer})
+
+
+def update_customer_checkin2(request, customer_id):
+    customer = Customer_2.objects.get(id=customer_id)  # Correct parameter here
+    
+    customer.check_in_status = 'SUCCESS'
+    customer.save()
+    return render(request, 'checkin/user2.html', {'user': customer})
+
+def checkuser(request, user_id):
+    userx = Customer.objects.get(id = user_id)
+    return render(request, 'checkin/user.html', {'user' : userx})
+
+
+def userform(request, user2_id):
+    customer2 = Customer_2.objects.get(id=user2_id)
+    if request.method == 'POST':
+        first_name = request.POST.get('first_name', None)
+        last_name = request.POST.get('last_name', None)
+        phone = request.POST.get('phone', None)
+        email = request.POST.get('email', None)
+
+        customer2.first_name = first_name
+        customer2.last_name = last_name
+        customer2.phone = phone
+        customer2.email = email
+        customer2.save()
+
+        return render(request, 'checkin/user2.html', {'user' : customer2})
+    else:
+        return render(request, 'checkin/userform.html', {'customer2': customer2})

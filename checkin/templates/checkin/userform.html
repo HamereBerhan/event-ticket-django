@@ -1,3 +1,13 @@
+<html>
+<head>
+<meta charset="UTF-8">
+<meta property="og:title" content="ንጹሕ ምንጭ ኢትዮጵያ ልዩ ዓውደ ርእይ መግቢያ ትኬት">
+<meta property="og:description" content="ሐመረ ብርሃን የብራና መጻሕፍት ሥራ ድርጅት ንጹሕ ምንጭ ኢትዮጵያ - ልዩ ዓውደ ርእይ ከሚያዝያ 5  እስከ 13 በግዮን ሆቴል">
+<meta property="og:image" content="https://hamereberhan.org/web%20ticket%20square%20image-01-01N.webp">
+<meta property="og:url" content="http://event.hamereberhan.org"> 
+<link rel="icon" type="image/x-icon" href="https://hamereberhan.org/favicon-32x32.png">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
 body {
   display: flex;
   align-items: center;
@@ -7,7 +17,6 @@ body {
   background: url('https://hamereberhan.org/cover%20for%20ticket%20webpage%202-01-01-01-01N.webp') center/cover no-repeat; /* Set background for the entire body */
 }
 
-<<<<<<< HEAD
 .form {
   display: flex;
   flex-direction: column;
@@ -24,10 +33,6 @@ body {
   .form {
     max-width: 100%;
   }
-=======
-.container h1 {
-	color: #fff000;
->>>>>>> 5c4882b9411a97b80a1f4b981df5f2607c13758e
 }
 
 @media (max-width: 600px) {
@@ -131,7 +136,6 @@ body {
   border-radius: 10px;
 }
 
-
 .form label .input + span {
   color: rgba(255, 255, 255, 0.5);
   position: absolute;
@@ -217,110 +221,61 @@ body {
         max-width: 100%;
       }
     }
-    /* === removing default button style ===*/
-.button {
-  margin: 0;
-  height: auto;
-  background: transparent;
-  padding: 0;
-  border: none;
-  cursor: pointer;
-}
+    footer {
+    text-align: center;
+    margin-top: 20px; /* Adjust the margin as needed for spacing */
+  }
 
-/* button styling */
-.button {
-  --border-right: 6px;
-  --text-stroke-color: rgba(255,255,255,0.6);
-  --animation-color: #37FF8B;
-  --fs-size: 2em;
-  letter-spacing: 3px;
-  text-decoration: none;
-  font-size: var(--fs-size);
-  font-family: "Arial";
-  position: relative;
-  text-transform: uppercase;
-  color: transparent;
-  -webkit-text-stroke: 1px var(--text-stroke-color);
-}
+  .footer-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 
-/* this is the text, when you hover on button */
-.hover-text {
-  position: absolute;
-  box-sizing: border-box;
-  content: attr(data-text);
-  color: var(--animation-color);
-  width: 0%;
-  inset: 0;
-  border-right: var(--border-right) solid var(--animation-color);
-  overflow: hidden;
-  transition: 0.5s;
-  -webkit-text-stroke: 1px var(--animation-color);
-}
-/* hover */
-.button:hover .hover-text {
-  width: 100%;
-  filter: drop-shadow(0 0 23px var(--animation-color))
-}
+  .footer-content p {
+    margin-bottom: 5px; /* Adjust the margin as needed for spacing between text and image */
+  }
 
-#qr-reader {
-  width: 100%;
-  height: auto;
-  background-color: #191818; /* Light gray background */
-  border: 2px dashed #007bff; /* Dashed border with blue color */
-  border-radius: 10px; /* Rounded corners */
-  margin-bottom: 20px;
-}
+  .footer-content img {
+    height: 50px;
+    width: auto; /* Automatically adjust the width to maintain aspect ratio */
+  }
 
-.search {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  text-align: center;
-}
+  </style>
+<title> "ንጹሕ ምንጭ ኢትዮጵያ" ልዩ ዓውደ ርእይ መግቢያ ትኬት      </title>
+</head>
+<body>
 
-.search__input {
-  font-family: inherit;
-  font-size: inherit;
-  background-color: #f4f2f2;
-  border: none;
-  color: #646464;
-  padding: 0.7rem 1rem;
-  border-radius: 30px;
-  width: 12em;
-  transition: all ease-in-out .5s;
-  margin-right: -2rem;
-}
+  <form class="form" action="{% url 'userform' user2.id %}" method="post" accept-charset="UTF-8">
+    
+    {% csrf_token %}
+    <p class="message">"ንጹሕ ምንጭ ኢትዮጵያ" <br>ልዩ ዓውደ ርእይ በግዮን ሆቴል</p>
+    <p>{{user2.id}}</p>
+    <div class="flex">
+      <label>
+        <input class="input" type="text" name="first_name" placeholder="" required="">
+        <span>ስም</span>
+      </label>
 
-.search__input:hover, .search__input:focus {
-  box-shadow: 0 0 1em #00000013;
-}
+      <label>
+        <input class="input" type="text"  name="last_name" required="">
+        <span>የአባት ስም</span>
+      </label>
+    </div>  
 
-.search__input:focus {
-  outline: none;
-  background-color: #f0eeee;
-}
+    <label>
+      <input class="input" type="tel" name="phone" placeholder="" required="">
+      <span>ስልክ ቁጥር</span>
+    </label>
 
-.search__input::-webkit-input-placeholder {
-  font-weight: 100;
-  color: #ccc;
-}
+    <label>
+      <input class="input" type="email" name="email" placeholder="" >
+      <span>ኢሜል</span>
+    </label> 
 
-.search__input:focus + .search__button {
-  background-color: #f0eeee;
-}
-
-.search__button {
-  border: none;
-  background-color: #f4f2f2;
-  margin-top: .1em;
-}
-
-.search__button:hover {
-  cursor: pointer;
-}
-
-.search__icon {
-  height: 1.3em;
-  width: 1.3em;
-  fill: #b4b4b4;
-}
+    <button class="submit" type="submit">ይመዝገቡ</button>
+    
+  
+  </form>
+</body>
+</html>

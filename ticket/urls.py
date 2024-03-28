@@ -31,10 +31,13 @@ urlpatterns = [
     path('success/<str:nonce>',handlers.success),
     path('err/', handlers.error),
     path('', handlers.home, name='home'),
-    path('scancode/', checkin.scan_qr),
+    path('scancode/', checkin.scan_qr, name='scan'),
     path('validate/', checkin.validate_user ,name = 'validator'),
     path('search/', checkin.search_customer, name='search'),
     path('checkin/<int:customer_id>', checkin.update_customer_checkin, name='update'),
+    path('checkuser/<int:user_id>', checkin.checkuser, name='user'),
+    path('userform/<int:user2_id>', checkin.userform, name='userform'),
+    path('checkin2/<int:customer_id>', checkin.update_customer_checkin2, name='update2'),
 
 ]
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
